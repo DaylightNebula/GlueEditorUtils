@@ -1,0 +1,8 @@
+[package]
+name = "glue_editor_file_list"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+egui = "0.22"
+eframe = "0.22"

@@ -997,15 +997,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "glue_editor"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "egui",
- "glue_editor_file_list",
-]
-
-[[package]]
 name = "glue_editor_file_list"
 version = "0.1.0"
 dependencies = [
