@@ -37,16 +37,20 @@ fn render_file_button(ui: &mut egui::Ui, file: DirEntry) {
     // render button for file
     ui.horizontal(|ui| {
         // build a button
-        let button = egui::Button::new(file.file_name().to_str().unwrap())
-            .fill(Color32::from_rgba_premultiplied(0, 0, 0, 0));
-        let response = ui.add(button);
+        let label = egui::Label::new(file.file_name().to_str().unwrap()).sense(Sense::click());
+        let response = ui.add(label);
 
-        if response.clicked() {
+        // check if button was clicked
+        if response.clone().clicked() {
             println!("Left click");
         }
 
-        if response.secondary_clicked() {
-            println!("Right click");
-        }
+        response.context_menu(|ui| {
+            if ui.button("Delete").clicked() {
+                let remove_result = fs::remove_file(file.path());
+                if remove_result.is_ok() { println!("Remove completed successfully!") } else { println!("Remove error: {}", remove_result.err().unwrap()) }
+                ui.close_menu();
+            }
+        });
     });
 }
